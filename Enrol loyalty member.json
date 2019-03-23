@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "fb32d9d6-98db-b640-9292-dfd0fc58ba3a",
+		"name": "Loyalty Staging",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Enroll Loyalty Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b50c115-4a04-43b0-b80f-2f9b9d48b02e",
+						"exec": [
+							"var responseJson = xml2Json(responseBody);",
+							"tests[\"Create Reservation\"]=console.log(\"Loyalty Number: \"+responseJson['soap:Envelope']['soap:Body']['ns3:enrollGuestResponse']['ns4:memberships']['ns4:membership']['$'].memberId);",
+							"",
+							"tests[\"Create Reservation\"]=console.log(\"PIN: \"+responseJson['soap:Envelope']['soap:Body']['ns3:enrollGuestResponse']['ns7:profile']['ns7:credentials']['ns7:credential']['ns7:pin']);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:v1=\"http://atp.ihg.com/schema/crm/guest/membership/servicetypes/v1\" xmlns:v11=\"http://atp.ihg.com/schema/common/ATPCommonServiceTypes/v1\" xmlns:v2=\"http://atp.ihg.com/schema/crm/common/crm/crmservice/datatypes/v2\" xmlns:v21=\"http://atp.ihg.com/schema/crm/guest/guest/datatypes/v2\" xmlns:v22=\"http://atp.ihg.com/schema/crm/common/person/personname/datatypes/v2\" xmlns:v23=\"http://atp.ihg.com/schema/crm/guest/guest/personalinfo/v2\" xmlns:v24=\"http://atp.ihg.com/schema/crm/common/contact/datatypes/v2\" xmlns:v25=\"http://atp.ihg.com/schema/crm/common/telcom/phone/datatypes/v2\" xmlns:v26=\"http://atp.ihg.com/schema/crm/common/location/address/datatypes/v2\" xmlns:v27=\"http://atp.ihg.com/schema/crm/guest/guest/contact/v2\" xmlns:v28=\"http://atp.ihg.com/schema/crm/guest/guest/member/v2\" xmlns:v12=\"http://atp.ihg.com/schema/crm/guest/membership/datatypes/v1\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <v1:enrollGuestRequest>\r\n          <atpHeader:header xmlns:atpHeader=\"http://atp.ihg.com/schema/common/ATPCommonServiceTypes/v1\">\r\n  <atpHeader:language isoCountryCode=\"US\" isoLanguageCode=\"en\"/>\r\n  <atpHeader:channel name=\"MHUI\"/>\r\n  <atpHeader:headerVersion major=\"\" minor=\"\" build=\"\"/>\r\n  <atpHeader:environment name=\"dc4_int\"/>\r\n  <atpHeader:user id=\"AMER\\user1\"/>\r\n  <atpHeader:transactionId id=\"0da33255-2566-4bb0-b7e8-3fa78caf8ad1 - SoapUI/GuestService.Slices/EnrollGuest (PC)/EnrollGuest (PC)/EnrollGuest (PC)\"/>\r\n  <atpHeader:sendTimeStamp>2018-05-31T13:11:38.188Z</atpHeader:sendTimeStamp>\r\n </atpHeader:header>\r\n \r\n\r\n\r\n         <v21:profile>\r\n            <v21:names>\r\n               <v21:name preferred=\"true\" relationId=\"1\" isoLanguageCode=\"en\">\r\n                  <v22:given>Sandy</v22:given>\r\n                  <v22:surname>Truthly</v22:surname>\r\n               </v21:name>\r\n            </v21:names>\r\n            <v21:addresses>\r\n               <v21:address valid=\"true\" preferred=\"true\" doNotChangeLock=\"false\">\r\n                  <v24:usageType>Home</v24:usageType>\r\n                  <v24:address isoCountryCode=\"US\" isoLanguageCode=\"en\">\r\n                     <v26:line1>bro</v26:line1>\r\n                     <v26:locality1>New York</v26:locality1>\r\n                     <v26:region1>NY</v26:region1>\r\n                     <v26:postalCode>10010</v26:postalCode>\r\n                     <v26:countryCode>US</v26:countryCode>\r\n                  </v24:address>\r\n               </v21:address>\r\n            </v21:addresses>\r\n            <v21:emails>\r\n               <v21:email preferred=\"true\">\r\n                  <v24:usageType>Home</v24:usageType>\r\n                  <v24:email address=\"email@abcd.com\" format=\"HTML\"/>\r\n               </v21:email>\r\n            </v21:emails>\r\n            <v21:phones>\r\n               <v21:phone valid=\"false\" preferred=\"false\" SMS=\"false\">\r\n                  <!--type: UsageTypeType - enumeration: [Home,Business,Other]-->\r\n                  <v23:usageType>Home</v23:usageType>\r\n                  <v23:phone fullNumber=\"+3752970771\" phoneType=\"Mobile\"/>\r\n               </v21:phone>\r\n            </v21:phones>\r\n            <v21:credentials>\r\n               <v21:credential>\r\n                  <v21:username>username</v21:username>\r\n                  <v21:password>password123</v21:password>\r\n                  <v21:pin>7083</v21:pin>\r\n                  <v21:invalidLoginAttempts>1</v21:invalidLoginAttempts>\r\n                  <v21:lockout>false</v21:lockout>\r\n                  <v21:securityQuestion>security question?</v21:securityQuestion>\r\n                  <v21:securityAnswer>security answer</v21:securityAnswer>\r\n               </v21:credential>\r\n            </v21:credentials>\r\n            <v21:marketingPermissions thirdPartyShare=\"Unknown\">\r\n               <v21:writtenLanguage isoLanguageCode=\"en\"/>\r\n               <v21:spokenLanguage/>\r\n               <v21:contactPermissions/>\r\n            </v21:marketingPermissions>\r\n         </v21:profile>\r\n        <v12:enrollmentRequests>\r\n            <v12:enrollmentRequest offerTreatmentId=\"SCCAL\">\r\n               <v12:membership programCode=\"PC\"/>\r\n               <v12:source code=\"SC\" locationCode=\"HANNJ\" channel=\"MSCUI\"/>\r\n            </v12:enrollmentRequest>\r\n         </v12:enrollmentRequests>\r\n      </v1:enrollGuestRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "http://iadd1-st1-gsa-ap.ihgint.global:8015/MembershipService",
+					"protocol": "http",
+					"host": [
+						"iadd1-st1-gsa-ap",
+						"ihgint",
+						"global"
+					],
+					"port": "8015",
+					"path": [
+						"MembershipService"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ba6961bb-c955-4247-a8e9-b3d3e108197f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b3b42d15-c7c4-426a-954c-0f6e4f5760a4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
